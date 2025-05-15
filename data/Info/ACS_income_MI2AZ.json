@@ -1,0 +1,46 @@
+{
+    "name": "ACS_income_MI2AZ",
+    "task_type": "binclass",
+    "header": "infer",
+    "column_names": [
+        "SEX",
+        "AGEP",
+        "WKHP",
+        "married",
+        "widowed",
+        "divorced",
+        "separated",
+        "never",
+        "SCHL",
+        "race",
+        "relp",
+        "cow",
+        "big_occp",
+        "large_occp",
+        "PINCP"
+    ],
+    "num_col_idx": [
+        1,
+        2,
+        8
+    ],
+    "cat_col_idx": [
+        0,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13
+    ],
+    "target_col_idx": [
+        14
+    ],
+    "file_type": "csv",
+    "data_path": "/data/yourname/data/tabular_in_UCI/ACS_income_MI/reduce_MI_income.csv",
+    "test_path": "/data/yourname/data/tabular_in_UCI/ACS_income_AZ/reduce_AZ_income.csv"
+}
