@@ -34,7 +34,7 @@ def main(args):
 
     train_z, _, _, ckpt_path, _ = get_input_train(args)
     if args.train_diffusion_model_class == 0:
-        df = pd.read_csv(f"/data/yourname/data/tabular_in_UCI/{args.dataname}/train.csv")
+        df = pd.read_csv(f"/data/my_stored_dataset/{args.dataname}/train.csv")
         if args.dataname == "adult":
             y = df["income"].values.reshape(-1)
             indices = torch.tensor(y == " <=50K")
@@ -57,7 +57,7 @@ def main(args):
         train_z = train_z[indices]
         print(f"train diffusion model with class 0, {train_z.shape[0]} samples")
     elif args.train_diffusion_model_class == 1:
-        df = pd.read_csv(f"/data/yourname/data/tabular_in_UCI/{args.dataname}/train.csv")
+        df = pd.read_csv(f"/data/my_stored_dataset/{args.dataname}/train.csv")
         if args.dataname == "adult":
             y = df["income"].values.reshape(-1)
             indices = torch.tensor(y == " >50K")

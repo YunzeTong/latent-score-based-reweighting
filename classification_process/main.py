@@ -50,7 +50,7 @@ def train_classification(args):
 
     device = args.device
     dataname = args.dataname
-    dataset_dir = f'/data/yourname/data/tabular_in_UCI/{dataname}'
+    dataset_dir = f'/data/my_stored_dataset/{dataname}'
     with open(f'{dataset_dir}/info.json', 'r') as f:
         info = json.load(f)
 
@@ -207,7 +207,7 @@ def test_classification(args):
 
     device = args.device
     dataname = args.dataname
-    dataset_dir = f'/data/yourname/data/tabular_in_UCI/{dataname}'
+    dataset_dir = f'/data/my_stored_dataset/{dataname}'
     with open(f'{dataset_dir}/info.json', 'r') as f:
         info = json.load(f)
 

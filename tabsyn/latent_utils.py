@@ -10,7 +10,7 @@ def get_input_train(args):
     dataname = args.dataname
 
     curr_dir = os.path.dirname(os.path.abspath(__file__))
-    dataset_dir = f'/data/yourname/data/tabular_in_UCI/{dataname}'
+    dataset_dir = f'/data/my_stored_dataset/{dataname}'
 
     with open(f'{dataset_dir}/info.json', 'r') as f:
         info = json.load(f)
@@ -32,7 +32,7 @@ def get_input_generate(args):
     dataname = args.dataname
 
     curr_dir = os.path.dirname(os.path.abspath(__file__))
-    dataset_dir = f'/data/yourname/data/tabular_in_UCI/{dataname}'
+    dataset_dir = f'/data/my_stored_dataset/{dataname}'
     ckpt_dir = f'{curr_dir}/ckpt/{dataname}'
 
     with open(f'{dataset_dir}/info.json', 'r') as f:

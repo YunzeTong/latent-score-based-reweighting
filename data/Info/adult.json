@@ -41,8 +41,8 @@
         14
     ],
     "file_type": "csv",
-    "data_path": "/data/yourname/data/tabular_in_UCI/adult/adult.data",
-    "test_path": "/data/yourname/data/tabular_in_UCI/adult/adult.test",
+    "data_path": "/data/my_stored_dataset/adult/adult.data",
+    "test_path": "/data/my_stored_dataset/adult/adult.test",
     "column_info": {
         "age": "float",
         "workclass": "str",

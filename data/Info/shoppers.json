@@ -28,6 +28,6 @@
         17
     ],
     "file_type": "csv",
-    "data_path": "/data/yourname/data/tabular_in_UCI/shoppers/online_shoppers_intention.csv",
+    "data_path": "/data/my_stored_dataset/shoppers/online_shoppers_intention.csv",
     "test_path": null
 }

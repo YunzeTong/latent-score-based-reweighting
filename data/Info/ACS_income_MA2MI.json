@@ -41,6 +41,6 @@
         14
     ],
     "file_type": "csv",
-    "data_path": "/data/yourname/data/tabular_in_UCI/ACS_income_MA/reduce_MA_income.csv",
-    "test_path": "/data/yourname/data/tabular_in_UCI/ACS_income_MI/reduce_MI_income.csv"
+    "data_path": "/data/my_stored_dataset/ACS_income_MA/reduce_MA_income.csv",
+    "test_path": "/data/my_stored_dataset/ACS_income_MI/reduce_MI_income.csv"
 }

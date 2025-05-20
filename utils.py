@@ -22,14 +22,6 @@ def execute_function(method, mode):
         elif mode == "discretize_error":
             from tabsyn.discretize_error_estimation import estimate_discrete_error
             train_function = estimate_discrete_error
-    elif method == 'tabddpm':
-        # module_name = f"baselines.tabddpm.main_train" if mode == 'main' else f"baselines.tabddpm.main_sample"
-        if mode == "main":
-            from baselines.tabddpm.main_train import main
-            train_function = main
-        elif mode == "sample":
-            from baselines.tabddpm.main_sample import main
-            train_function = main
     else:
         module_name = f"baselines.{method}.{mode}"
 

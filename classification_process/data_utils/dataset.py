@@ -30,8 +30,8 @@ class Weighted_Dataset(Dataset):
         if use_weight:
             
             if weight_criterion == "common_error":
-                unweight_error = torch.load(f"/data/yourname/code/tabsyn/weights/{dataname}/unweight_error_2.pt")
-                sigma = torch.load(f"/data/yourname/code/tabsyn/weights/{dataname}/sigma_2.pt")
+                unweight_error = torch.load(f"./weights/{dataname}/unweight_error_2.pt")
+                sigma = torch.load(f"./weights/{dataname}/sigma_2.pt")
                 
                 if args.timestep_weight_criterion == "up":
                     time_weight = sigma
@@ -72,11 +72,11 @@ class Weighted_Dataset(Dataset):
                 df.to_csv(f"{weight_store_path}/weight.csv")
             
             elif weight_criterion == "error_diff":
-                unweight_zero_model_error = torch.load(f"/data/yourname/code/tabsyn/weights/{dataname}/unweight_error_0.pt") # .mean(dim=(1, 2))
-                unweight_one_model_error = torch.load(f"/data/yourname/code/tabsyn/weights/{dataname}/unweight_error_1.pt") # .mean(dim=(1,2))
+                unweight_zero_model_error = torch.load(f"./weights/{dataname}/unweight_error_0.pt") # .mean(dim=(1, 2))
+                unweight_one_model_error = torch.load(f"./weights/{dataname}/unweight_error_1.pt") # .mean(dim=(1,2))
 
-                zero_model_sigma = torch.load(f"/data/yourname/code/tabsyn/weights/{dataname}/sigma_0.pt")
-                one_model_sigma = torch.load(f"/data/yourname/code/tabsyn/weights/{dataname}/sigma_1.pt")
+                zero_model_sigma = torch.load(f"./weights/{dataname}/sigma_0.pt")
+                one_model_sigma = torch.load(f"./weights/{dataname}/sigma_1.pt")
 
                 if args.timestep_weight_criterion == "down":
                     zero_model_time_weight = 1 / zero_model_sigma ** 2
@@ -117,8 +117,8 @@ class Weighted_Dataset(Dataset):
                 df.to_csv(f"{weight_store_path}/weight.csv")
             
             elif weight_criterion == "single_timestep_common_error":
-                unweight_error = torch.load(f"/data/yourname/code/tabsyn/weights_discrete/{dataname}/unweight_error_2.pt").cpu()
-                sigma = torch.load(f"/data/yourname/code/tabsyn/weights_discrete/{dataname}/sigma_2.pt").cpu()
+                unweight_error = torch.load(f"./weights_discrete/{dataname}/unweight_error_2.pt").cpu()
+                sigma = torch.load(f"./weights_discrete/{dataname}/sigma_2.pt").cpu()
                 
                 error = unweight_error[:, args.single_sigma_index, :, :]
                 mean_error = torch.mean(error, dim=(1, 2))
@@ -134,8 +134,8 @@ class Weighted_Dataset(Dataset):
                 df.to_csv(f"{weight_store_path}/weight.csv")
 
             elif weight_criterion == "single_timestep_error_diff":
-                unweight_zero_model_error = torch.load(f"/data/yourname/code/tabsyn/weights_discrete/{dataname}/unweight_error_0.pt").cpu()
-                unweight_one_model_error = torch.load(f"/data/yourname/code/tabsyn/weights_discrete/{dataname}/unweight_error_1.pt").cpu()
+                unweight_zero_model_error = torch.load(f"./weights_discrete/{dataname}/unweight_error_0.pt").cpu()
+                unweight_one_model_error = torch.load(f"./weights_discrete/{dataname}/unweight_error_1.pt").cpu()
                 
                 zero_model_error = unweight_zero_model_error[:, args.single_sigma_index, :, :]
                 zero_model_mean_error = torch.mean(zero_model_error, dim=(1, 2))
@@ -161,11 +161,11 @@ class Weighted_Dataset(Dataset):
 
             elif weight_criterion == "several_timestep_error_diff":
                 # Original Experiment run with weight_discrete, num_timesteps=10, K=32
-                unweight_zero_model_error = torch.load(f"/data/yourname/code/tabsyn/weights_discrete_10_{args.K}/{dataname}/unweight_error_0.pt").cpu()
-                unweight_one_model_error = torch.load(f"/data/yourname/code/tabsyn/weights_discrete_10_{args.K}/{dataname}/unweight_error_1.pt").cpu()
+                unweight_zero_model_error = torch.load(f"./weights_discrete_10_{args.K}/{dataname}/unweight_error_0.pt").cpu()
+                unweight_one_model_error = torch.load(f"./weights_discrete_10_{args.K}/{dataname}/unweight_error_1.pt").cpu()
                 
-                zero_model_sigma = torch.load(f"/data/yourname/code/tabsyn/weights_discrete_10_{args.K}/{dataname}/sigma_0.pt").cpu()
-                one_model_sigma = torch.load(f"/data/yourname/code/tabsyn/weights_discrete_10_{args.K}/{dataname}/sigma_1.pt").cpu()
+                zero_model_sigma = torch.load(f"./weights_discrete_10_{args.K}/{dataname}/sigma_0.pt").cpu()
+                one_model_sigma = torch.load(f"./weights_discrete_10_{args.K}/{dataname}/sigma_1.pt").cpu()
 
                 if args.selected_several_sigma_indices != None:
                     print(f"use selected several timesteps: {args.selected_several_sigma_indices}")
@@ -219,7 +219,7 @@ class Weighted_Dataset(Dataset):
         self.return_index = return_index
         self.attr = returned_attr
         if returned_attr is not None:
-            raw_df = pd.read_csv(f"/data/yourname/data/tabular_in_UCI/{dataname}/test.csv")
+            raw_df = pd.read_csv(f"/data/my_stored_dataset/{dataname}/test.csv")
             attr_indicator = raw_df[returned_attr].values
             self.attr_indicator = self.preprocess_attributes(attr_indicator)
 

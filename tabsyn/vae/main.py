@@ -57,7 +57,7 @@ def compute_loss(X_num, X_cat, Recon_X_num, Recon_X_cat, mu_z, logvar_z):
 
 def main(args):
     dataname = args.dataname
-    data_dir = f'/data/yourname/data/tabular_in_UCI/{dataname}'
+    data_dir = f'/data/my_stored_dataset/{dataname}'
 
     max_beta = args.max_beta
     min_beta = args.min_beta
@@ -66,7 +66,7 @@ def main(args):
     device =  args.device
 
 
-    info_path = f'/data/yourname/data/tabular_in_UCI/{dataname}/info.json'
+    info_path = f'/data/my_stored_dataset/{dataname}/info.json'
 
     with open(info_path, 'r') as f:
         info = json.load(f)

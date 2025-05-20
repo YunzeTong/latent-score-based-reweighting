@@ -13,66 +13,6 @@ TYPE_TRANSFORM ={
 
 INFO_PATH = './data/Info'
 
-parser = argparse.ArgumentParser(description='process dataset')
-
-# General configs
-parser.add_argument('--dataname', type=str, help='Name of dataset.')
-args = parser.parse_args()
-
-def preprocess_beijing():
-    with open(f'{INFO_PATH}/beijing.json', 'r') as f:
-        info = json.load(f)
-    
-    data_path = info['raw_data_path']
-
-    data_df = pd.read_csv(data_path)
-    columns = data_df.columns
-
-    data_df = data_df[columns[1:]]
-
-
-    df_cleaned = data_df.dropna()
-    df_cleaned.to_csv(info['data_path'], index = False)
-
-def preprocess_news():
-    with open(f'{INFO_PATH}/news.json', 'r') as f:
-        info = json.load(f)
-
-    data_path = info['raw_data_path']
-    data_df = pd.read_csv(data_path)
-    data_df = data_df.drop('url', axis=1)
-
-    columns = np.array(data_df.columns.tolist())
-
-    cat_columns1 = columns[list(range(12,18))]
-    cat_columns2 = columns[list(range(30,38))]
-
-    cat_col1 = data_df[cat_columns1].astype(int).to_numpy().argmax(axis = 1)
-    cat_col2 = data_df[cat_columns2].astype(int).to_numpy().argmax(axis = 1)
-
-    data_df = data_df.drop(cat_columns2, axis=1)
-    data_df = data_df.drop(cat_columns1, axis=1)
-
-    data_df['data_channel'] = cat_col1
-    data_df['weekday'] = cat_col2
-    
-    data_save_path = '/data/yourname/data/tabular_in_UCI/news/news.csv'
-    data_df.to_csv(f'{data_save_path}', index = False)
-
-    columns = np.array(data_df.columns.tolist())
-    num_columns = columns[list(range(45))]
-    cat_columns = ['data_channel', 'weekday']
-    target_columns = columns[[45]]
-
-    info['num_col_idx'] = list(range(45))
-    info['cat_col_idx'] = [46, 47]
-    info['target_col_idx'] = [45]
-    info['data_path'] = data_save_path
-    
-    name = 'news'
-    with open(f'{INFO_PATH}/{name}.json', 'w') as file:
-        json.dump(info, file, indent=4)
-
 
 def get_column_name_mapping(data_df, num_col_idx, cat_col_idx, target_col_idx, column_names = None):
     
@@ -147,11 +87,6 @@ def train_val_test_split(data_df, cat_columns, num_train = 0, num_test = 0):
 
 def process_data(name):
 
-    if name == 'news':
-        preprocess_news()
-    elif name == 'beijing':
-        preprocess_beijing()
-
     with open(f'{INFO_PATH}/{name}.json', 'r') as f:
         info = json.load(f)
 
@@ -184,7 +119,7 @@ def process_data(name):
 
         with open(test_path, 'r') as f:
             lines = f.readlines()[1:]
-            test_save_path = f'/data/yourname/data/tabular_in_UCI/{name}/test.data'
+            test_save_path = f'/data/my_stored_dataset/{name}/test.data'
             if not os.path.exists(test_save_path):
                 with open(test_save_path, 'a') as f1:     
                     for line in lines:
@@ -258,7 +193,7 @@ def process_data(name):
     y_test = test_df[target_columns].to_numpy()
 
  
-    save_dir = f'/data/yourname/data/tabular_in_UCI/{name}'
+    save_dir = f'/data/my_stored_dataset/{name}'
     np.save(f'{save_dir}/X_num_train.npy', X_num_train)
     np.save(f'{save_dir}/X_cat_train.npy', X_cat_train)
     np.save(f'{save_dir}/y_train.npy', y_train)
@@ -342,5 +277,9 @@ def process_data(name):
 
 if __name__ == "__main__":
 
-    process_data("ACS_income_MI2AZ")
+    parser = argparse.ArgumentParser(description='process dataset')
+    parser.add_argument('--dataname', type=str, help='Name of dataset.')
+    args = parser.parse_args()
+
+    process_data(args.dataname)
 

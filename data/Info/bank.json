@@ -45,6 +45,6 @@
         16
     ],
     "file_type": "csv",
-    "data_path": "/data/yourname/data/tabular_in_UCI/bank/bank-full.csv",
+    "data_path": "/data/my_stored_dataset/bank/bank-full.csv",
     "test_path": null
 }

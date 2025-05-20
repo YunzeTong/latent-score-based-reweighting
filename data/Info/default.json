@@ -34,6 +34,6 @@
         23
     ],
     "file_type": "xls",
-    "data_path": "/data/yourname/data/tabular_in_UCI/default/default of credit card clients.xls",
+    "data_path": "/data/my_stored_dataset/default/default of credit card clients.xls",
     "test_path": null
 }
